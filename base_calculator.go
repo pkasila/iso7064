@@ -79,6 +79,6 @@ func (c *BaseCalculator) ComputeChars(input string) (string, error) {
 		first := (checksum - second) / c.Radix
 		return c.Charset[first:first+1] + c.Charset[second:second+1], nil
 	} else {
-		return c.Charset[checksum:checksum], nil
+		return c.Charset[checksum:checksum+1], nil
 	}
 }
