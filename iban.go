@@ -48,8 +48,7 @@ func (c *IBANCalculator) Compute(input string) (string, error) {
 	// Uppercase input
 	upperCased := strings.ToUpper(input)
 
-	conv := c.convertIBAN(upperCased)
-	cChars, err := c.baseCalculator.ComputeChars(conv[:len(conv)-2]) // Without check digits
+	cChars, err := c.ComputeChars(upperCased) // Without check digits
 	if err != nil {
 		return upperCased, err
 	}
@@ -61,5 +60,6 @@ func (c *IBANCalculator) Compute(input string) (string, error) {
 }
 
 func (c *IBANCalculator) ComputeChars(input string) (string, error) {
-	return c.baseCalculator.ComputeChars(c.convertIBAN(input))
+	conv := c.convertIBAN(input)
+	return c.baseCalculator.ComputeChars(conv[:len(conv)-2]) // Without place holder
 }
